@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -16,16 +18,12 @@ public class Bank {
 
     private Long id;
 
-    @TableField(fill = FieldFill.INSERT)
-    private Date createTime;
+    private LocalDateTime createTime;
 
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    private Date updateTime;
+    private LocalDateTime updateTime;
 
-    @TableField(fill = FieldFill.INSERT)
     private String createBy;
 
-    @TableField(fill = FieldFill.INSERT_UPDATE)
     private String updateBy;
 
     private String bankCode;

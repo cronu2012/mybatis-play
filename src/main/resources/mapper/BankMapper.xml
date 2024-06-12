@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mybatis_play.daomapper.BankDao">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.example.mybatis_play.domain.Bank">
+        <id column="id" property="id" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="create_by" property="createBy" />
+        <result column="update_by" property="updateBy" />
+        <result column="bank_code" property="bankCode" />
+        <result column="bank_name" property="bankName" />
+        <result column="is_del" property="isDel" />
+        <result column="is_enable" property="isEnable" />
+    </resultMap>
+
+<!--    drop table t_bank;-->
+
+<!--    CREATE TABLE t_bank (-->
+<!--    id BIGINT NOT NULL AUTO_INCREMENT,-->
+<!--    create_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,-->
+<!--    update_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,-->
+<!--    create_by VARCHAR(50) NOT NULL,-->
+<!--    update_by VARCHAR(50) NOT NULL,-->
+<!--    bank_code VARCHAR(20) NOT NULL,-->
+<!--    bank_name VARCHAR(100) NOT NULL,-->
+<!--    is_del TINYINT NOT NULL DEFAULT 0,-->
+<!--    is_enable TINYINT NOT NULL DEFAULT 1,-->
+<!--    PRIMARY KEY (id),-->
+<!--    UNIQUE KEY unique_bank_code (bank_code),-->
+<!--    UNIQUE KEY unique_bank_name (bank_name)-->
+<!--    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;-->
+
+    <!-- 查询所有银行信息 -->
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT * FROM t_bank WHERE is_del = 0
+    </select>
+
+    <!-- 根据ID查询银行信息 -->
+    <select id="selectById" parameterType="long" resultMap="BaseResultMap">
+        SELECT * FROM t_bank WHERE id = #{id} AND is_del = 0
+    </select>
+
+    <!-- 插入新银行信息 -->
+    <insert id="insert" parameterType="com.example.mybatis_play.domain.Bank" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_bank (create_by, update_by, bank_code, bank_name, is_del, is_enable)
+        VALUES (#{createBy}, #{updateBy}, #{bankCode}, #{bankName})
+    </insert>
+<!--    INSERT INTO t_bank (create_by, update_by, bank_code, bank_name)-->
+<!--    VALUES ('galen001', 'galen001' , 'Q18', '護膚銀行');-->
+
+    <!-- 更新银行信息 -->
+    <update id="update" parameterType="com.example.mybatis_play.domain.Bank">
+        UPDATE t_bank
+        SET update_by = #{updateBy},
+        bank_code = #{bankCode},
+        bank_name = #{bankName},
+        is_enable = #{isEnable}
+        WHERE id = #{id} AND is_del = 0
+    </update>
+
+    <!-- 逻辑删除银行信息 -->
+    <update id="deleteById" parameterType="long">
+        UPDATE t_bank SET is_del = 1 WHERE id = #{id}
+    </update>
+
+    <!-- 從資料庫删除银行資料 -->
+    <delete id="delete" parameterType="long">
+        DELETE FROM t_bank WHERE id = #{id}
+    </delete>
+
+</mapper>
