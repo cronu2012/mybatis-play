@@ -7,7 +7,7 @@ import java.util.List;
 
 
 @Mapper
-public interface BankMapper {
+public interface BankAnnoMapper {
 
     @Results(id = "BankResultMap", value = {
             @Result(property = "id", column = "id"),

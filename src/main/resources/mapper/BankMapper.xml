@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.example.mybatis_play.daomapper.BankDao">
+<mapper namespace="com.example.mybatis_play.daomapper.BankXmlMapper">
 
 
     <!-- 通用查询映射结果 -->
@@ -67,7 +67,8 @@
     <!-- 更新银行信息 -->
     <update id="update" parameterType="com.example.mybatis_play.domain.Bank">
         UPDATE t_bank
-        SET update_by = #{updateBy},
+        SET  create_by = #{createBy},
+        update_by = #{updateBy},
         bank_code = #{bankCode},
         bank_name = #{bankName},
         is_enable = #{isEnable}
