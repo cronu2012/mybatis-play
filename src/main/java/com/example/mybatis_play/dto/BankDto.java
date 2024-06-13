@@ -30,5 +30,5 @@ public class BankDto {
      */
     private Integer isEnable;
 
-    private String log;
+    private String message;
 }

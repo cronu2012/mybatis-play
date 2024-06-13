@@ -6,7 +6,7 @@ import java.util.List;
 
 @Data
 public class BankListDto {
-    private String log;
+    private String message;
 
     private List<BankDto> list;
 }

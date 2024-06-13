@@ -2,7 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.example.mybatis_play.daomapper.BankDao">
+
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.example.mybatis_play.domain.Bank">
@@ -44,9 +46,19 @@
         SELECT * FROM t_bank WHERE id = #{id} AND is_del = 0
     </select>
 
+    <!-- 根据bankCode查询银行信息 -->
+    <select id="selectByBankCode" parameterType="string" resultMap="BaseResultMap">
+        SELECT * FROM t_bank WHERE bank_code = #{bankCode} AND is_del = 0
+    </select>
+
+    <!-- 根据bankName查询银行信息 -->
+    <select id="selectByBankName" parameterType="string" resultMap="BaseResultMap">
+        SELECT * FROM t_bank WHERE bank_name = #{bankName} AND is_del = 0
+    </select>
+
     <!-- 插入新银行信息 -->
     <insert id="insert" parameterType="com.example.mybatis_play.domain.Bank" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO t_bank (create_by, update_by, bank_code, bank_name, is_del, is_enable)
+        INSERT INTO t_bank (create_by, update_by, bank_code, bank_name)
         VALUES (#{createBy}, #{updateBy}, #{bankCode}, #{bankName})
     </insert>
 <!--    INSERT INTO t_bank (create_by, update_by, bank_code, bank_name)-->

@@ -13,9 +13,13 @@ public interface BankDao {
 
    Bank selectById(Long id);
 
+   Bank selectByBankCode(String bankCode);
+
+   Bank selectByBankName(String bankName);
+
    Long insert(Bank bank);
 
-   Bank update(Bank bank);
+   Long update(Bank bank);
 
    int deleteById(Long id);
 
