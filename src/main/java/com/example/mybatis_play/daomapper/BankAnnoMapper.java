@@ -40,11 +40,11 @@ public interface BankAnnoMapper {
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     Long insert(Bank bank);
 
-    @Update("UPDATE t_bank" +
-            " SET update_by = #{updateBy}," +
-            " bank_code = #{bankCode}," +
-            " bank_name = #{bankName}," +
-            " is_enable = #{isEnable}" +
+    @Update("UPDATE t_bank SET " +
+            " update_by = CASE WHEN #{updateBy} IS NOT NULL THEN #{updateBy} ELSE update_by END, " +
+            " bank_code = CASE WHEN #{bankCode} IS NOT NULL THEN #{bankCode} ELSE bank_code END, " +
+            " bank_name = CASE WHEN #{bankName} IS NOT NULL THEN #{bankName} ELSE bank_name END, " +
+            " is_enable = CASE WHEN #{isEnable} IS NOT NULL THEN #{isEnable} ELSE is_enable END " +
             " WHERE id = #{id} AND is_del = 0")
     Long update(Bank bank);
 

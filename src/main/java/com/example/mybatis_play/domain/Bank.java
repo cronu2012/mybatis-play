@@ -1,8 +1,6 @@
 package com.example.mybatis_play.domain;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -16,6 +14,7 @@ public class Bank {
 
     private static final long serialVersionUID = 1L;
 
+    @TableId(type = IdType.AUTO)
     private Long id;
 
     private LocalDateTime createTime;
@@ -32,5 +31,5 @@ public class Bank {
 
     private Integer isEnable;
 
-    private Boolean isDel;
+    private Integer isDel;
 }

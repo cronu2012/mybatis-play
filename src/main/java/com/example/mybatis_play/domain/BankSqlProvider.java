@@ -82,12 +82,9 @@ public class BankSqlProvider {
      * @param bank
      * @return
      */
-    public String update(Long id, Bank bank) {
+    public String update(Bank bank) {
         return new SQL() {{
             UPDATE("t_bank");
-            if (bank.getCreateBy() != null) {
-                SET("create_by = #{createBy}");
-            }
             if (bank.getUpdateBy() != null) {
                 SET("update_by = #{updateBy}");
             }
