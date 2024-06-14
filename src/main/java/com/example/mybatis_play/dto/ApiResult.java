@@ -5,7 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-public class ApiResult<T> implements Serializable {
+public class ApiResult implements Serializable {
     private String head;
-    private T data;
+    private Object data;
 }

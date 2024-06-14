@@ -3,10 +3,10 @@ package com.example.mybatis_play.service;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
 import cn.hutool.json.JSONObject;
+import com.example.mybatis_play.daomapper.BankAnnoMapper;
 import com.example.mybatis_play.daomapper.BankBaseMapper;
 import com.example.mybatis_play.daomapper.BankProviderMapper;
 import com.example.mybatis_play.daomapper.BankXmlMapper;
-import com.example.mybatis_play.daomapper.BankAnnoMapper;
 import com.example.mybatis_play.domain.Bank;
 import com.example.mybatis_play.dto.ApiResult;
 import com.example.mybatis_play.dto.BankDto;
@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Slf4j
 @Service
@@ -190,12 +191,12 @@ public class BankService {
         Bank bankByCode = bankXmlMapper.selectByBankCode(bankDto.getBankCode());
         Bank bankByName = bankXmlMapper.selectByBankName(bankDto.getBankName());
 
-        if(bankByCode != null && id != bankByCode.getId()){
+        if(bankByCode != null && !Objects.equals(id, bankByCode.getId())){
             response.setData("新的銀行編碼不可與其他銀行重複!");
             response.setHead("更新失敗");
             return response;
         }
-        if (bankByName != null && id != bankByName.getId()) {
+        if (bankByName != null && !Objects.equals(id, bankByName.getId())) {
             response.setData("新的銀行名稱不可與其他銀行重複!");
             response.setHead("更新失敗");
             return response;

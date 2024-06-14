@@ -23,14 +23,14 @@ public interface BankProviderMapper {
 
     @InsertProvider(type = BankSqlProvider.class, method = "insert")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-    Long insert(Bank bank);
+    void insert(Bank bank);
 
     @UpdateProvider(type = BankSqlProvider.class, method = "update")
     Long update(Bank bank);
 
     @UpdateProvider(type = BankSqlProvider.class, method = "deleteById")
-    int deleteById(Long id);
+    void deleteById(Long id);
 
     @DeleteProvider(type = BankSqlProvider.class, method = "delete")
-    int delete(Long id);
+    void delete(Long id);
 }

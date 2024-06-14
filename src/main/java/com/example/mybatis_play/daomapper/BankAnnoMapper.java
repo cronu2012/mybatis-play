@@ -38,7 +38,7 @@ public interface BankAnnoMapper {
     @Insert("INSERT INTO t_bank (create_by, update_by, bank_code, bank_name)" +
             " VALUES (#{createBy}, #{updateBy}, #{bankCode}, #{bankName})")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-    Long insert(Bank bank);
+    void insert(Bank bank);
 
     @Update("UPDATE t_bank SET " +
             " update_by = CASE WHEN #{updateBy} IS NOT NULL THEN #{updateBy} ELSE update_by END, " +
@@ -49,8 +49,8 @@ public interface BankAnnoMapper {
     Long update(Bank bank);
 
     @Update("UPDATE t_bank SET is_del = 1 WHERE id = #{id}")
-    int deleteById(Long id);
+    void deleteById(Long id);
 
     @Delete("DELETE FROM t_bank WHERE id = #{id}")
-    int delete(Long id);
+    void delete(Long id);
 }

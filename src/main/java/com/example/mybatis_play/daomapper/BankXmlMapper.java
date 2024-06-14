@@ -16,11 +16,11 @@ public interface BankXmlMapper {
 
    Bank selectByBankName(String bankName);
 
-   Long insert(Bank bank);
+   void insert(Bank bank);
 
    Long update(Bank bank);
 
-   int deleteById(Long id);
+   void deleteById(Long id);
 
-   int delete(Long id);
+   void delete(Long id);
 }

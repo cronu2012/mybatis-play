@@ -7,7 +7,6 @@ import com.example.mybatis_play.dto.BankDto;
 import com.example.mybatis_play.service.BankService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.annotations.Delete;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +24,7 @@ public class BankController {
     @GetMapping("all")
     public ResponseEntity<?> findAll(@RequestParam Integer method) {
 
-        ApiResult response = null;
+        ApiResult response;
         try {
             response = bankService.findAll(method);
         } catch (Exception e) {
@@ -37,7 +36,7 @@ public class BankController {
 
     @GetMapping("")
     public ResponseEntity<?> findOne(@RequestParam Long id, @RequestParam Integer method) {
-        ApiResult response = null;
+        ApiResult response ;
         try {
             response = bankService.findById(id, method);
         } catch (Exception e) {
@@ -93,7 +92,7 @@ public class BankController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteId(@PathVariable Long id, Integer method){
-        ApiResult response = null;
+        ApiResult response;
         try {
             response = bankService.deleteById(id, method);
         } catch (Exception e) {
@@ -107,7 +106,7 @@ public class BankController {
 
     @DeleteMapping("/del/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id, Integer method){
-        ApiResult response = null;
+        ApiResult response;
         try {
             response = bankService.delete(id, method);
         } catch (Exception e) {

@@ -2,44 +2,50 @@ package com.example.mybatis_play.daomapper;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.mybatis_play.domain.Bank;
-import org.apache.ibatis.annotations.Options;
-import org.springframework.stereotype.Component;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Component
-public interface BankBaseMapper extends BaseMapper<Bank> {
+@Repository
+@AllArgsConstructor
+public class BankBaseMapper {
+    
+    private final BankMapper bankMapper;
 
-    default List<Bank> selectAll() {
+    public List<Bank> selectAll() {
         QueryWrapper<Bank> wrapper = new QueryWrapper<>();
         wrapper.eq("is_del", 0);
-        return this.selectList(wrapper);
+        return bankMapper.selectList(wrapper);
     }
 
-    default Bank selectById(Long id) {
+    public Bank selectById(Long id) {
         QueryWrapper<Bank> wrapper = new QueryWrapper<>();
         wrapper.eq("id", id)
                 .eq("is_del", 0);
-        return this.selectOne(wrapper);
+        return bankMapper.selectOne(wrapper);
     }
 
-    default Bank selectByBankCode(String bankCode) {
+    public Bank selectByBankCode(String bankCode) {
         QueryWrapper<Bank> wrapper = new QueryWrapper<>();
         wrapper.eq("bank_code", bankCode)
                 .eq("is_del", 0);
-        return this.selectOne(wrapper);
+        return bankMapper.selectOne(wrapper);
     }
 
-    default Bank selectByBankName(String bankName) {
+    public Bank selectByBankName(String bankName) {
         QueryWrapper<Bank> wrapper = new QueryWrapper<>();
         wrapper.eq("bank_name", bankName)
                 .eq("is_del", 0);
-        return this.selectOne(wrapper);
+        return bankMapper.selectOne(wrapper);
     }
 
-    default int update(Bank bank) {
+    public void insert(Bank bank) {
+        bankMapper.insert(bank);
+    }
+
+    public int update(Bank bank) {
         UpdateWrapper<Bank> wrapper = new UpdateWrapper<>();
         wrapper.set(bank.getUpdateBy() != null, "update_by", bank.getUpdateBy())
                 .set(bank.getBankCode() != null, "bank_code", bank.getBankCode())
@@ -47,19 +53,19 @@ public interface BankBaseMapper extends BaseMapper<Bank> {
                 .set(bank.getIsEnable() != null, "is_enable", bank.getIsEnable())
                 .eq("id", bank.getId())
                 .eq("is_del", 0);
-        return this.update(wrapper);
+        return bankMapper.update(wrapper);
     }
 
-    default  int deleteById(Long id) {
+    public void deleteById(Long id) {
         UpdateWrapper<Bank> wrapper = new UpdateWrapper<>();
         wrapper.set("is_del", 1)
                 .eq("id", id);
-        return this.update(wrapper);
+        bankMapper.update(wrapper);
     }
 
-    default int delete(Long id) {
+    public void delete(Long id) {
         QueryWrapper<Bank> wrapper = new QueryWrapper<>();
         wrapper.eq("id", id);
-        return this.delete(wrapper);
+        bankMapper.delete(wrapper);
     }
 }

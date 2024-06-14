@@ -1,6 +1,5 @@
 package com.example.mybatis_play.domain;
 
-import com.example.mybatis_play.domain.Bank;
 import org.apache.ibatis.jdbc.SQL;
 
 
@@ -8,7 +7,8 @@ public class BankSqlProvider {
 
     /**
      * 查询所有银行信息
-     * @return
+     *
+     * @return SQL
      */
     public String selectAll() {
         return new SQL() {{
@@ -17,10 +17,12 @@ public class BankSqlProvider {
             WHERE("is_del = 0");
         }}.toString();
     }
+
     /**
      * 根据ID查询银行信息
-     * @param id
-     * @return
+     *
+     * @param id ID
+     * @return SQL
      */
     public String selectById(Long id) {
         return new SQL() {{
@@ -31,10 +33,12 @@ public class BankSqlProvider {
             WHERE("is_del = 0");
         }}.toString();
     }
+
     /**
      * 根据bankCode查询银行信息
-     * @param bankCode
-     * @return
+     *
+     * @param bankCode 銀行代碼
+     * @return SQL
      */
     public String selectByBankCode(String bankCode) {
         return new SQL() {{
@@ -48,8 +52,9 @@ public class BankSqlProvider {
 
     /**
      * 根据bankName查询银行信息
-     * @param bankName
-     * @return
+     *
+     * @param bankName 銀行名稱
+     * @return SQL
      */
     public String selectByBankName(String bankName) {
         return new SQL() {{
@@ -63,8 +68,9 @@ public class BankSqlProvider {
 
     /**
      * 插入新银行信息
-     * @param bank
-     * @return
+     *
+     * @param bank 銀行資料
+     * @return SQL
      */
     public String insert(Bank bank) {
         return new SQL() {{
@@ -78,9 +84,9 @@ public class BankSqlProvider {
 
     /**
      * 更新银行信息
-     * @param id
-     * @param bank
-     * @return
+     *
+     * @param bank 銀行資料
+     * @return SQL
      */
     public String update(Bank bank) {
         return new SQL() {{
@@ -105,10 +111,11 @@ public class BankSqlProvider {
 
     /**
      * 逻辑删除银行信息
-     * @param id
-     * @return
+     *
+     * @param id ID
+     * @return SQL
      */
-    public String deleteById(Long id){
+    public String deleteById(Long id) {
         return new SQL() {{
             UPDATE("t_bank");
             SET("is_del = 1");
@@ -118,10 +125,11 @@ public class BankSqlProvider {
 
     /**
      * 從資料庫删除银行資料
-     * @param id
-     * @return
+     *
+     * @param id ID
+     * @return SQL
      */
-    public String delete(Long id){
+    public String delete(Long id) {
         return new SQL() {{
             DELETE_FROM("t_bank");
             WHERE("id = #{id}");
