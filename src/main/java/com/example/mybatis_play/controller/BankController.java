@@ -5,6 +5,7 @@ import cn.hutool.json.JSONObject;
 import com.example.mybatis_play.dto.ApiResult;
 import com.example.mybatis_play.dto.BankDto;
 import com.example.mybatis_play.service.BankService;
+import com.example.mybatis_play.service.BankServiceImpl;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -115,6 +116,23 @@ public class BankController {
         }
 
         return ResponseEntity.status("刪除成功".equals(response.getHead()) ? HttpStatus.OK : HttpStatus.SERVICE_UNAVAILABLE)
+                .body(response);
+    }
+
+    @PostMapping("/bank_code")
+    public ResponseEntity<?> findByCondition(Integer start, Integer end){
+        if(start == null) start = -1;
+        if(end == null) end = -1;
+
+        ApiResult response;
+        try {
+            response = bankService.findByCondition(start, end);
+        } catch (Exception e) {
+            log.error("Service findByCondition: {}", e.getMessage());
+            return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).build();
+        }
+
+        return ResponseEntity.status("Success".equals(response.getHead()) ? HttpStatus.OK : HttpStatus.SERVICE_UNAVAILABLE)
                 .body(response);
     }
 
