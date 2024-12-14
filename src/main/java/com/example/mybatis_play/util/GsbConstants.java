@@ -1,4 +1,4 @@
-package com.example.mybatis_play.controller;
+package com.example.mybatis_play.util;
 
 public interface GsbConstants {
     String BANK_CODE = "GSB";
